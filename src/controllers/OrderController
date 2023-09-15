@@ -1,0 +1,56 @@
+const knex = require("../database/knex");
+
+class OrderController {
+  async create(req, res) {
+      const { user_id, dish_id, amount, status } = req.body;
+      // const database = await sqliteConnection();
+      // const checkifDishIdExists = await database.get('SELECT * FROM dishes WHERE id!=(?)', [dishId])
+      // if(checkifDishIdExists){
+      //   throw new AppError("Esse prato não existe")
+      // }
+      const [order_id] = await knex('orders').insert({
+        user_id,
+        dish_id,
+        amount,
+        status
+      });
+
+      return res.status(201).json({ message: 'Pedido criado com sucesso', order_id });
+  }
+
+
+//   async create(req, res) {
+//     const { userId, selectedDishes } = req.body;
+//     const [order_id] = await knex('orders').insert({
+//       user_id: userId,
+//       // amount: price
+//     });
+//     // Calculate the total amount and update the order
+//     // const totalAmount = await this.calculateTotalAmount(order_id, selectedDishes);
+//     // await knex('order').where('id', order_id).update({ amount });
+
+//     return res.status(201).json({ message: 'Pedido criado com sucesso', order_id });
+// }
+// async calculateTotalAmount(orderId, selectedDishes) {
+  //   let totalAmount = 0;
+  //   for (const dish of selectedDishes) {
+  //     // Fetch the dish price from the "dishes" table
+  //     const dishPrice = await knex('dishes').where('id', dish.dish_id).select('price').first();
+  //     // Calculate the total amount for the current dish
+  //     const dishTotal = dishPrice.price * dish.quantity;
+  //     // Add the dish total to the overall total amount
+  //     totalAmount += dishTotal;
+  //     // Insert the dish into the "order_details" table
+  //     await knex('order_details').insert({
+  //       order_id: orderId,
+  //       dish_id: dish.dish_id,
+  //       quantity: dish.quantity,
+  //       price: dishPrice.price,
+  //     });
+  //   }
+
+  //   return totalAmount;
+  // }
+}
+module.exports = OrderController;
+
