@@ -10,7 +10,7 @@ const verifyUserAuthorization = require("../middlewares/verifyUserAuthorization"
 
 const dishImgController = new DishImgController
 const dishController = new DishController();
-dishesRoutes.use(ensureAuthentication);
+// dishesRoutes.use(ensureAuthentication);
 
 dishesRoutes.get("/", dishController.index);
 dishesRoutes.post("/", verifyUserAuthorization("admin"), dishController.create);

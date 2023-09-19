@@ -15,6 +15,7 @@ class SessionsController {
       throw new AppError("E-mail ou senha incorreto(s)", 401)
     }
     const {secret, expiresIn} = authConfig.jwt
+    
     const token = sign({role: user.role}, secret, {
       subject: String(user.id),
       expiresIn
@@ -24,8 +25,10 @@ class SessionsController {
       sameSite: "Strict",
       secure: true,
       maxAge: 15 * 60 * 1000
-    })
-    return res.json({user});
+    });
+    delete user.password
+    
+    res.status(201).json({user});
   }
 }
 module.exports = SessionsController;

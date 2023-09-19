@@ -2,10 +2,12 @@ require("express-async-errors");
 
 const cors = require("cors")
 const express = require("express");
-const cookieParser = require("cookie-parser");
-const AppError = require("./utils/AppError");
+const routes = require("./routes");
 const migrationsRun = require("./database/sqlite/migrations");
 migrationsRun();
+
+const cookieParser = require("cookie-parser");
+const AppError = require("./utils/AppError");
 
 const app = express();
 app.use(express.json());
@@ -14,7 +16,6 @@ app.use(cors({
     origin: ['http://localhost:5173', 'http://127.0.0.1:5173/'],
     credentials: true
   }));
-const routes = require("./routes");
 app.use(routes);
 app.use((error, req, res, next)=>{
   if(error instanceof AppError){
