@@ -62,36 +62,35 @@ class DishController{
     );
     return res.status(200).json({message: 'Prato atualizado com sucesso', id});
   }
-  async index(req, res){
-    const {id, name, ingredients} = req.query;
-    let dishes
-    if(ingredients){
-      const filterIngredients = ingredients.split(',').map(ingredients => ingredients.trim())
+  async index(req, res) {
+    const { name, ingredients, category } = req.query;
+    let dishes;
+  
+    if (ingredients) {
+      const filterIngredients = ingredients.split(',').map(ingredient => ingredient.trim());
       dishes = await knex("ingredients")
-      .select([
-        "dishes.id",
-        "dishes.name"
-      ])
-      .whereLike("dishes.name", `%${name}%`)
-      .whereIn("ingredients.name", filterIngredients)
-      .innerJoin("dishes", "dishes.id", "ingredients.dish_id")
-      .orderBy("dishes.name")
-    } else{
+        .select([
+          "dishes.id",
+          "dishes.name",
+          "dishes.category"
+        ])
+        .whereLike("dishes.name", `%${name}%`)
+        .whereIn("ingredients.name", filterIngredients)
+        .innerJoin("dishes", "dishes.id", "ingredients.dish_id")
+        .orderBy("dishes.name");
+    } else if (name) {
       dishes = await knex("dishes")
-      .where({id})
-      .whereLike("name", `%${name}%`)
-      .orderBy("name")
+        .whereLike("name", `%${name}%`)
+        .orderBy("name");
+    } else if (category) { // Perform a case-insensitive search for category
+      dishes = await knex("dishes")
+        .whereLike("category", `%${category}%`)
+        .orderBy("name");
+    } else {
+      dishes = await knex("dishes").orderBy("name");
     }
-    // const ingredientsDish = await knex("ingredients").where({id})
-    // const dishIngredients = dishes.map(dish =>{
-    // const dishIngredient = ingredientsDish.filter(ingredient => ingredient.dish_id === dish.id)
-      
-    //   return {
-    //     ...dish,
-    //     ingredients: dishIngredient
-    //   }
-    // })
-      return res.json(dishes);
+  
+    return res.json(dishes);
   }
 }
 
