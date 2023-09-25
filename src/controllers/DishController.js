@@ -19,7 +19,7 @@ class DishController{
     })
     await knex("ingredients").insert(ingredientsInsert)
 
-    return res.json()
+    return res.status(201).json({dish_id})
   }
   async show(req, res){
     const {id} = req.params;

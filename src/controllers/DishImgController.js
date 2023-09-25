@@ -5,7 +5,7 @@ const AppError = require("../utils/AppError");
 class DishImgController{
   async update(req, res){
     const user_id = req.user.id;
-    const {id} = req.body
+    const {id} = req.params
     const dishFilename = req.file.filename;
     const diskStorage = new DiskStorage();
     const user = await knex("users").where({id: user_id}).first();
