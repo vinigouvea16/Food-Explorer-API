@@ -45,7 +45,18 @@ class DishController{
     if(!dish){
       throw new AppError("Prato não encontrado")
     }
-
+    if (name !== undefined) {
+      dish.name = name;
+    }
+    if (description !== undefined) {
+      dish.description = description;
+    }
+    if (price !== undefined) {
+      dish.price = price;
+    }
+    if (category !== undefined) {
+      dish.category = category;
+    }
     dish.name = name ?? dish.name;
     dish.description = description ?? dish.description;
     dish.price = price ?? dish.price;
