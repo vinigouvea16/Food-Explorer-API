@@ -76,24 +76,26 @@ class DishController{
   async index(req, res) {
     const { name, ingredients, category } = req.query;
     let dishes;
-  
     if (ingredients) {
-      const filterIngredients = ingredients.split(',').map(ingredient => ingredient.trim());
+      // const filterIngredients = ingredients.split(',').map(ingredient => ingredient.trim());
       dishes = await knex("ingredients")
         .select([
           "dishes.id",
           "dishes.name",
-          "dishes.category"
+          "dishes.category",
+          "dishes.price",
+          "dishes.image"
         ])
         .whereLike("dishes.name", `%${name}%`)
-        .whereIn("ingredients.name", filterIngredients)
+        .whereLike("ingredients.name", `%${ingredients}%`)
+        // .whereIn("ingredients.name", ingredients)
         .innerJoin("dishes", "dishes.id", "ingredients.dish_id")
         .orderBy("dishes.name");
     } else if (name) {
       dishes = await knex("dishes")
         .whereLike("name", `%${name}%`)
         .orderBy("name");
-    } else if (category) { // Perform a case-insensitive search for category
+    } else if (category) {
       dishes = await knex("dishes")
         .whereLike("category", `%${category}%`)
         .orderBy("name");
