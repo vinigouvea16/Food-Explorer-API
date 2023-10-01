@@ -1,10 +1,10 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "API desenvolvida para o projeto final - um CRUD de um ecommerce de um restaurante ficticio - do curso Explorer, da Rocketseat.",
+  "description": "API desenvolvida para o projeto final - um CRUD de um ecommerce de um restaurante fictício - do curso Explorer, da Rocketseat.",
   "main": "index.js",
   "scripts": {
-    "start": "node ./src/server.js",
+    "start": "pm2-runtime start ecosystem.config.js --env production",
     "dev": "nodemon ./src/server.js",
     "migrate": "knex migrate:latest"
   },
@@ -15,6 +15,7 @@
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
     "firebase": "^10.4.0",
