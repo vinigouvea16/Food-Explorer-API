@@ -5,7 +5,7 @@
 [![Issues no GitHub](https://img.shields.io/github/issues/vinigouvea16/food-explorer.svg)](https://github.com/vinigouvea16/Food-Explorer-API/issues)
 
 > 🇧🇷 O Food Explorer é uma incrível aplicação web que proporciona uma experiência única ao simular um menu interativo para um restaurante fictício. Ele mergulha os usuários em uma jornada envolvente e informativa, permitindo que eles explorem pratos, bebidas e opções de cardápio de forma interativa e visualmente deslumbrante. Com o Food Explorer, os clientes podem explorar os pratos, visualizar imagens, ler descrições e acessar informações detalhadas sobre cada item, criando uma experiência gastronômica virtual que os deixará com água na boca.
--- 
+<br />
 > 🇺🇸 Food Explorer is a web application that simulates an interactive menu for a fictional restaurant. It provides an engaging and informative experience to users, allowing them to explore dishes, drinks, and menu options interactively and in a visually appealing manner. With Food Explorer, customers can browse through dishes, view images, descriptions, and detailed information about each item, creating a unique virtual gastronomic experience.
 
 ##  Demonstração do Projeto 💻
