@@ -14,8 +14,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/files', express.static(path.resolve(__dirname, '..' ,'tmp', 'uploads')));
 app.use(cors({
-    origin: ['http://localhost:5173', 'http://127.0.0.1:5173/'],
-    credentials: true
+    origin: ['https://food-explorer-1xvt.vercel.app', 'http://127.0.0.1:5173/'],
+    credentials: true,
+    allowedHeaders: '*',
+    methods: ['GET', 'OPTIONS', 'PATCH', 'DELETE', 'POST', 'PUT'],
   }));
 app.use(routes);
 app.use((error, req, res, next)=>{
