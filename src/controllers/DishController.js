@@ -77,7 +77,6 @@ class DishController{
     const { name, ingredients, category } = req.query;
     let dishes;
     if (ingredients) {
-      // const filterIngredients = ingredients.split(',').map(ingredient => ingredient.trim());
       dishes = await knex("ingredients")
         .select([
           "dishes.id",
@@ -88,7 +87,6 @@ class DishController{
         ])
         .whereLike("dishes.name", `%${name}%`)
         .whereLike("ingredients.name", `%${ingredients}%`)
-        // .whereIn("ingredients.name", ingredients)
         .innerJoin("dishes", "dishes.id", "ingredients.dish_id")
         .orderBy("dishes.name");
     } else if (name) {
