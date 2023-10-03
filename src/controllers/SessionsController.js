@@ -20,12 +20,12 @@ class SessionsController {
       subject: String(user.id),
       expiresIn
     })
-    // res.cookie("token", token, {
-    //   httpOnly: true,
-    //   sameSite: "Strict",
-    //   secure: true,
-    //   maxAge: 15 * 60 * 1000
-    // });
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true,
+      maxAge: 15 * 60 * 1000
+    });
     delete user.password
     
     res.status(201).json({user});
