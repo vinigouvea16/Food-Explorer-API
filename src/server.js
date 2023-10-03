@@ -14,11 +14,16 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/files', express.static(path.resolve(__dirname, '..' ,'tmp', 'uploads')));
 app.use(cors({
-    origin: ['https://foodexplorervinigouvea.netlify.app', 'http://127.0.0.1:5173/'],
-    credentials: true,
-    allowedHeaders: '*',
-    methods: ['GET', 'OPTIONS', 'PATCH', 'DELETE', 'POST', 'PUT'],
+    origin: ['https://foodexplorervinigouvea.netlify.app', 'http://127.0.0.1:5173'],
+    // credentials: true,
+    // allowedHeaders: '*',
+    methods: ['GET', 'OPTIONS', 'PATCH', 'DELETE', 'POST', 'PUT', 'HEAD'],
   }));
+// app.use(cors({
+//   origin: ['https://food-explorer-gamma.vercel.app'],
+//   optionsSuccessStatus: 200,
+// }),
+// )
 app.use(routes);
 app.use((error, req, res, next)=>{
   if(error instanceof AppError){
