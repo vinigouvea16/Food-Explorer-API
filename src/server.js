@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: '*',
+  origin: process.env.DOMAIN,
   credentials: true,
 }));
 app.use('/files', express.static(path.resolve(__dirname, '..' ,'tmp', 'uploads')));
